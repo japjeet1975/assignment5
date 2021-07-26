@@ -1,6 +1,3 @@
-
-
-
 var currentDayEl = $("#currentDay");
 
 var currentDate = moment().format("MMMM Do, YYYY");
@@ -19,7 +16,14 @@ var currentTime = moment().format('H');
 //changing colours as per time 
 for(i=0; i<textEl.length; i++){
 console.log($(textEl[i]).siblings(".hour").attr("id"));
-console.log (currentTime);
+// console.log (currentTime);
+
+var taskName = localStorage.getItem(i+9);
+console.log("taskName= ", taskName);
+if (taskName != null) {
+	$(textEl[i]).text(taskName);
+}
+
 if ( $(textEl[i]).siblings(".hour").attr("id") == parseInt(currentTime)){
 	$(textEl[i]).addClass("present");
 }
@@ -31,7 +35,8 @@ else {
 }
 }
 
-
-
-
-
+$(".saveBtn").on("click", function() {
+    var taskNameInput = $(this).siblings(".description").val();
+    var timeHour = $(this).siblings(".hour").attr("id");
+    localStorage.setItem(timeHour, taskNameInput);
+  });
